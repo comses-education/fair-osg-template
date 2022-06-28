@@ -1,4 +1,5 @@
-# customize via `% make build OSG_USERNAME=<your-osg-username>` e.g., `% make build OSG_USERNAME=alee`
+# customize by creating a custom config.mk file or `% make build OSG_USERNAME=<your-osg-username>` e.g., `% make build OSG_USERNAME=alee`
+include config.mk
 
 OSG_USERNAME := ${USER}
 OSG_MODEL_NAME := ${OSG_MODEL_NAME}
