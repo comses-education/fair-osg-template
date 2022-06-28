@@ -9,7 +9,7 @@ MODEL_CODE_DIRECTORY=${MODEL_CODE_DIRECTORY:-/srv/code}
 # executable to run on the entrypoint script, e.g., python | julia | netlogo-headless.sh | bash
 ENTRYPOINT_SCRIPT_EXECUTABLE=${1:-/bin/bash}
 # entrypoint script to run your model
-ENTRYPOINT_SCRIPT=${2:-run-model.sh}
+ENTRYPOINT_SCRIPT=${2:-run.sh}
 # directory where your model's results should be stored, relative to /srv/ in the singularity container
 RESULTS_DIR=${3:-results}
 
