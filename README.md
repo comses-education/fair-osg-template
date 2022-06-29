@@ -5,34 +5,16 @@ This template repository provides scaffolding and support for [Docker](https://d
 Makefile is included to be customized with basic `build | deploy | clean` targets to build container images in Docker
 and Singularity and copy the generated Singularity image and model files to the OSG login node.
 
-You must have already gone through the OSG facilitation process with access to an Open Science Grid login node before
-`% make deploy` will work and you should create an alias in your `.ssh/config` that assigns the name `osg` to your OSG
-login node. E.g.,
+# TODO LIST
 
-```
-Host osg
-    HostName login02.osgconnect.net
-    User <your-assigned-osg-username>
-    IdentityFile ~/.ssh/a-private-ssh-key that you generated and added to your OSG profile on 
-```
-
-For more information on connecting to OSG and generating SSH keys, please see
-https://support.opensciencegrid.org/support/solutions/articles/12000027675-generate-ssh-keys-and-activate-your-osg-login
-
-## TODO LIST
-
-### Documentation
+## Documentation
 
 - [ ] add narrative documentation in durable text formats (e.g., PDF with no special extensions, .odt OpenOffice Document file, Markdown / plaintext) about your computational model ideally with visual diagrams, flowcharts, etc., that describe expected inputs, outputs, assumptions, and consider adhering to a structured, domain-specific protocols like the [ODD Protocol for Describing Agent-Based and other Simulation Models](https://www.jasss.org/23/2/7.html) 
 - [ ] include a README.md with a quick start for new users that addresses the following basic concerns:
-- [ ] What does this model do?
-- [ ] How do I run it?
-- [ ] What are some example inputs? What are the expected outputs for those example inputs? Where do they live?
-- [ ] How do I analyze or understand the outputs?
 - [ ] What assumptions if any are embedded in the model?
-- [ ] Is it possible to change or extend the model? (optional)
+- [ ] Is it possible to change or extend the model?
 
-### Containerization and Scripts
+## Containerization and Scripts
 
 - [ ] specify pinned software and system dependencies to be installed in Docker and Singularity
 - [ ] identify an appropriate base image. You can use base images prefixed with `osg-` for common platforms
@@ -40,26 +22,63 @@ https://support.opensciencegrid.org/support/solutions/articles/12000027675-gener
   image (e.g., https://github.com/opensciencegrid/osgvo-ubuntu-20.04
 - [ ] customize job-wrapper.sh
 
-### Running the model
+## How to run this model
 
-There are two script files available. You can run a single simulation using a fixed parameter set using `scripts/OneRun.jl` as follows:
+- [ ] What does this model do?
+- [ ] How do I run it?
+- [ ] What are some example inputs? What are the expected outputs for those example inputs? Where do they live?
+- [ ] How do I analyze or understand the outputs?
 
-```bash
-$ julia scripts/OneRun.jl
+## Running on Open Science Grid
+
+### Set up your user account on the Open Science Grid 
+
+https://osg-htc.org/research-facilitation/accounts-and-projects/general/index.html
+
+You must have already gone through the OSG facilitation process with access to an Open Science Grid login node before
+`% make deploy` will work and you should create an alias in your `.ssh/config` that assigns the name `osg` to your OSG
+login node.
+
+For example,
+
+```
+Host osg
+    HostName login02.osgconnect.net
+    User <your-assigned-osg-username>
+    IdentityFile ~/.ssh/a-private-ssh-key that you generated and added to your OSG profile
 ```
 
-Results from this single run will be saved in a `results` folder as `singlerun.csv`.
+For more information on connecting to OSG and generating SSH keys, please see
+https://support.opensciencegrid.org/support/solutions/articles/12000027675-generate-ssh-keys-and-activate-your-osg-login
 
-The second option, `scripts/ParameterRuns.jl`, lets you run a parameter exploration experiment. The default setup of this experiment will run 2700 simulations. To modify the parameter values to be evaluated or the replicates for each combination, open `scripts/ParameterRuns.jl` and edit lines 11 to 14. Like the first option, you can run the script from bash:
+### Customize entry point scripts and model metadata
 
-```bash
-$ julia scripts/ParameterRuns.jl
+```
+# user to connect to OSG as
+OSG_USERNAME := ${USER}
+# name of this computational model, used as the namespace (for singularity, Docker, and as a folder to keep things
+# organized on the OSG filesystem login node). recommend that you use all lowercase alphanumeric with - or _ to
+# separate words, e.g., chime-abm or spatial-rust-model
+MODEL_NAME := ${OSG_MODEL_NAME}
+# the directory (in the container) where the computational model source
+# code or executable can be called, e.g., main.py | netlogo-headless.sh
+MODEL_CODE_DIRECTORY := /code
+# entrypoint script to be called by job-wrapper.sh
+ENTRYPOINT_SCRIPT := /srv/run.sh
+# entrypoint script language
+ENTRYPOINT_SCRIPT_EXECUTABLE := bash
+# the OSG output file to be transferred
+OSG_OUTPUT_FILES := /srv/results.zip
+# the submit file to be executed on OSG via `condor_submit ${OSG_SUBMIT_FILE}`
+OSG_SUBMIT_FILENAME := ${OSG_MODEL_NAME}.submit
+# the initial entrypoint for the OSG job, calls ENTRYPOINT_SCRIPT
+OSG_JOB_SCRIPT := job-wrapper.sh
 ```
 
-Results from this experiment will be saved in a `results` folder as `parameterexp.csv`. Both scripts take care of creating the `results` folder if it has not been created yet.
+These can be customized in the make command or by modifying the config.mk file
 
-### Running on Open Science Grid
-1. Establish an account on Open Science Grid
-   https://osg-htc.org/research-facilitation/accounts-and-projects/general/index.html
-2. Build a singularity image from this file via `./build.sh <your-osg-username>`
-3. Copy the singularity image e.g., `spatialrust-v1.sif` to your OSG `/public/<username>` directory
+(TODO: do this via cookiecutter and cookiecutter.json?)
+
+`make OSG_USERNAME=<your-username> build`
+
+
