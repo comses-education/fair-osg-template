@@ -1,11 +1,6 @@
 # customize by creating a custom config.mk file or `% make build OSG_USERNAME=<your-osg-username>` e.g., `% make build OSG_USERNAME=alee`
 include config.mk
 
-OSG_USERNAME := ${USER}
-OSG_MODEL_NAME := ${OSG_MODEL_NAME}
-# the directory (in the container) where the computational model source code or executable can be called, e.g.,
-# main.py or netlogo-headless.sh
-
 # user to connect to OSG as
 OSG_USERNAME := ${USER}
 # name of this computational model
