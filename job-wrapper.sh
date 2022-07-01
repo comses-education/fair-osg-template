@@ -4,7 +4,7 @@ set -e
 
 # the directory (in the container) where the computational model source code or executable can be called, e.g.,
 # main.py | run.sh | julia-entrypoint.jl | model.R | netlogo-headless.sh
-MODEL_CODE_DIRECTORY=${MODEL_CODE_DIRECTORY:-/srv/code}
+MODEL_CODE_DIRECTORY=${MODEL_CODE_DIRECTORY:-/code}
 
 # executable to run on the entrypoint script, e.g., python | julia | netlogo-headless.sh | bash
 ENTRYPOINT_SCRIPT_EXECUTABLE=${1:-/bin/bash}
@@ -19,17 +19,17 @@ printf "Start time: "; /bin/date -Iminutes
 printf "Job running on node: "; /bin/hostname
 printf "OSG site: $OSG_SITE_NAME"
 printf "Job running as user: "; /usr/bin/id
-printf "Command line args: $@"
-printf "Creating results dir at /srv/${RESULTS_DIR}"
+echo "Command line args: $@"
+echo "Creating results dir at /srv/${RESULTS_DIR}"
 printf "Running model code in ${MODEL_CODE_DIRECTORY} [${SCRIPT_EXECUTABLE} ${ENTRYPOINT_SCRIPT}]"
 
 mkdir -p /srv/${RESULTS_DIR}
 
 cd ${MODEL_CODE_DIRECTORY}
 
-${SCRIPT_EXECUTABLE} ${ENTRYPOINT_SCRIPT} 2>&1
+${ENTRYPOINT_SCRIPT_EXECUTABLE} ${ENTRYPOINT_SCRIPT} 2>&1
 
-printf "${SCRIPT_EXECUTABLE} ${ENTRYPOINT_SCRIPT} execution completed: "; /bin/date -Iminutes
+printf "${ENTRYPOINT_SCRIPT_EXECUTABLE} ${ENTRYPOINT_SCRIPT} execution completed: "; /bin/date -Iminutes
 
 tar Jcvf /srv/results.tar.xz /srv/${RESULTS_DIR}
 
