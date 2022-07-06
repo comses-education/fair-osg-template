@@ -31,6 +31,6 @@ ${ENTRYPOINT_SCRIPT_EXECUTABLE} ${ENTRYPOINT_SCRIPT} 2>&1
 
 printf "${ENTRYPOINT_SCRIPT_EXECUTABLE} ${ENTRYPOINT_SCRIPT} execution completed: "; /bin/date -Iminutes
 
-tar Jcvf /srv/results.tar.xz /srv/${RESULTS_DIR}
+zip -r /srv/results.zip /srv/${RESULTS_DIR}
 
-echo "Results archived in results.tar.xz with exit code $?"
+echo "Results archived in results.zip with exit code $?"
