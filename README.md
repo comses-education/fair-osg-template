@@ -29,7 +29,7 @@ and Singularity and copy the generated Singularity image and model files to the 
 - [ ] What are some example inputs? What are the expected outputs for those example inputs? Where do they live?
 - [ ] How do I analyze or understand the outputs?
 
-## Running on Open Science Grid
+## Running on the Open Science Grid
 
 ### Set up your user account on the Open Science Grid 
 
@@ -68,17 +68,37 @@ ENTRYPOINT_SCRIPT := /srv/run.sh
 # entrypoint script language
 ENTRYPOINT_SCRIPT_EXECUTABLE := bash
 # the OSG output file to be transferred
-OSG_OUTPUT_FILES := /srv/results.zip
+OSG_OUTPUT_FILES := output,results
 # the submit file to be executed on OSG via `condor_submit ${OSG_SUBMIT_FILE}`
 OSG_SUBMIT_FILENAME := ${OSG_MODEL_NAME}.submit
 # the initial entrypoint for the OSG job, calls ENTRYPOINT_SCRIPT
 OSG_JOB_SCRIPT := job-wrapper.sh
 ```
 
-These can be customized in the make command or by modifying the config.mk file
+(TODO: set data via cookiecutter and cookiecutter.json in cookiecutter project + document further)
 
-(TODO: do this via cookiecutter and cookiecutter.json?)
+These can be customized in the make command.
+
+Then run
 
 `make OSG_USERNAME=<your-username> build`
+
+to build Docker + Singularity images with the model + dependencies embedded or
+
+`make OSG_USERNAME=<your-username> clean deploy`
+
+to build and then copy the images to your OSG login node and public directory.
+
+## Input and Output Files
+
+OSG defaults transfer all generated output files. If your model generates all files in a given directory, say `output` and/or `results`, something like
+
+`transfer_output_files = output,results`
+
+should work, e.g., a comma separated list of 
+
+For more information, see https://htcondor.readthedocs.io/en/latest/users-manual/file-transfer.html#specifying-what-files-to-transfer
+
+
 
 
