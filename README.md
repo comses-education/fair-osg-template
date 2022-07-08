@@ -1,15 +1,10 @@
 # fair-osg-template
 
-This template repository provides scaffolding and support for [Docker](https://docs.docker.com),
-[Singularity](https://sylabs.io/singularity/), and the [Open Science Grid (OSG)](https://opensciencegrid.org/). A
-Makefile is included to be customized with basic `build | deploy | clean` targets to build container images in Docker
-and Singularity and copy the generated Singularity image and model files to the OSG login node.
-
-# TODO LIST
+This template repository provides scaffolding and support for adopting the [FAIR4RS Principles](https://doi.org/10.15497/RDA00068) and containerization support for [Docker](https://docs.docker.com), [Singularity](https://sylabs.io/singularity/), and the [Open Science Grid (OSG)](https://opensciencegrid.org/). A basic Makefile is included to be customized with basic `build | deploy | clean` targets to build container images in Docker and Singularity and copy the generated Singularity image and model files to an OSG login node.
 
 ## FAIR4RS Principles
 
-More details at https://doi.org/10.15497/RDA00068 and [this template repository's wiki](https://github.com/comses-education/fair-osg-template/wiki/FAIR-Principles-for-Research-Software).
+More details at [this template repository's wiki](https://github.com/comses-education/fair-osg-template/wiki/FAIR-Principles-for-Research-Software).
 
 - [ ] **Findable**: create a persistent identifier for each released / published version of the software
 - [ ] **Accessible**: make your software open source (good start, using this!), ensure that it is well documented with descriptive metadata and narrative documentation, and make sure that this metadata remains accessible even if the software is not
