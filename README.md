@@ -7,6 +7,15 @@ and Singularity and copy the generated Singularity image and model files to the 
 
 # TODO LIST
 
+## FAIR4RS Principles
+
+More details at https://doi.org/10.15497/RDA00068 and [this template repository's wiki](https://github.com/comses-education/fair-osg-template/wiki/FAIR-Principles-for-Research-Software)
+
+- [ ] Findable: create a persistent identifier for each released / published version of the software
+- [ ] Accessible: make your software open source (good start, using this!), ensure that it is well documented with descriptive metadata and narrative documentation, and make sure that this metadata remains accessible even if the software is not
+- [ ] Interoperable: your software should read, write, and exchange data using domain-relevant *open* community standards (e.g., netCDF, HDF, CSVs, etc.)
+- [ ] Reusable: Software can be executed and understood, modified, built upon, or incorporated into other software - a clear and accessible license, detailed provenance metadata, qualified persistent references to other software dependencies, domain-relevant community standards
+
 ## Documentation
 
 - [ ] add narrative documentation in durable text formats (e.g., PDF with no special extensions, .odt OpenOffice Document file, Markdown / plaintext) about your computational model ideally with visual diagrams, flowcharts, etc., that describe expected inputs, outputs, assumptions, and consider adhering to a structured, domain-specific protocols like the [ODD Protocol for Describing Agent-Based and other Simulation Models](https://www.jasss.org/23/2/7.html) 
