@@ -9,12 +9,12 @@ and Singularity and copy the generated Singularity image and model files to the 
 
 ## FAIR4RS Principles
 
-More details at https://doi.org/10.15497/RDA00068 and [this template repository's wiki](https://github.com/comses-education/fair-osg-template/wiki/FAIR-Principles-for-Research-Software)
+More details at https://doi.org/10.15497/RDA00068 and [this template repository's wiki](https://github.com/comses-education/fair-osg-template/wiki/FAIR-Principles-for-Research-Software).
 
-- [ ] Findable: create a persistent identifier for each released / published version of the software
-- [ ] Accessible: make your software open source (good start, using this!), ensure that it is well documented with descriptive metadata and narrative documentation, and make sure that this metadata remains accessible even if the software is not
-- [ ] Interoperable: your software should read, write, and exchange data using domain-relevant *open* community standards (e.g., netCDF, HDF, CSVs, etc.)
-- [ ] Reusable: Software can be executed and understood, modified, built upon, or incorporated into other software - a clear and accessible license, detailed provenance metadata, qualified persistent references to other software dependencies, domain-relevant community standards
+- [ ] **Findable**: create a persistent identifier for each released / published version of the software
+- [ ] **Accessible**: make your software open source (good start, using this!), ensure that it is well documented with descriptive metadata and narrative documentation, and make sure that this metadata remains accessible even if the software is not
+- [ ] **Interoperable**: your software should read, write, and exchange data using domain-relevant *open* community standards (e.g., netCDF, HDF, domain-specific controlled vocabularies or ontologies, etc.)*
+- [ ] **Reusable**: Software can be executed and understood, modified, built upon, or incorporated into other software - a clear and accessible license, detailed provenance metadata, qualified persistent references to other software dependencies, domain-relevant community standards* 
 
 ## Documentation
 
